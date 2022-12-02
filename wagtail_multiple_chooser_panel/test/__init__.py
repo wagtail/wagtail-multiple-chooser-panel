@@ -1,0 +1,1 @@
+default_app_config = "wagtail_multiple_chooser_panel.test.apps.WagtailMultipleChooserPanelTestAppConfig"

@@ -1,0 +1,44 @@
+{
+  "name": "wagtail-multiple-chooser-panel",
+  "version": "0.1.0",
+  "description": "An InlinePanel variant allowing multiple items to be quickly selected",
+  "main": "wagtail_multiple_chooser_panel/static_src/main.tsx",
+  "scripts": {
+    "start": "webpack --config ./webpack.config.js --mode development --progress --watch",
+    "build": "webpack --config ./webpack.config.js --mode production",
+    "format": "prettier --write '**/?(.)*.{css,scss,js,ts,tsx,json,yaml,yml}'",
+    "lint:js": "eslint --ext .js,.ts,.tsx --report-unused-disable-directives --max-warnings 16 ./",
+    "lint:css": "stylelint **/*.scss",
+    "lint:format": "prettier --check '**/?(.)*.{css,scss,js,ts,tsx,json,yaml,yml}'",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:format"
+  },
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.19",
+    "@types/styled-components": "^5.1.23",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "@wagtail/eslint-config-wagtail": "^0.4.0",
+    "@wagtail/stylelint-config-wagtail": "^0.5.0",
+    "eslint": "^8.9.0",
+    "file-loader": "^6.2.0",
+    "postcss-loader": "^6.2.1",
+    "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
+    "sass-loader": "^12.4.0",
+    "sass": "^1.45.3",
+    "stylelint": "^14.5.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
+  }
+}

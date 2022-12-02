@@ -1,0 +1,65 @@
+name: Multiple Chooser Panel CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'stable/**'
+
+  pull_request:
+
+jobs:
+  test-sqlite:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        django: ['3.2', '4.1', '4.2']
+        wagtail: ['4.1']
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Tox
+        run: |
+          python -m pip install tox
+      - name: Test
+        run: |
+          tox
+        env:
+          TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-sqlite
+
+  test-postgres:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        django: ['3.2', '4.1', '4.2']
+        wagtail: ['4.1']
+        postgres: ['10.8']
+
+    services:
+      postgres:
+        image: postgres:${{ matrix.postgres }}
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Tox
+        run: |
+          python -m pip install tox
+      - name: Test
+        run: |
+          tox
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/wagtail_multiple_chooser_panel
+          TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-postgres
