@@ -46,7 +46,7 @@
 
 <script>
     (function() {
-        var panel = InlinePanel({
+        var panel = MyInlinePanel({
             formsetPrefix: "id_{{ self.formset.prefix }}",
             emptyChildFormPrefix: "{{ self.empty_child.form.prefix }}",
             canOrder: {% if can_order %}true{% else %}false{% endif %},

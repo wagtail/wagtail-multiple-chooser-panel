@@ -2,7 +2,7 @@
   "name": "wagtail-multiple-chooser-panel",
   "version": "0.1.0",
   "description": "An InlinePanel variant allowing multiple items to be quickly selected",
-  "main": "wagtail_multiple_chooser_panel/static_src/main.tsx",
+  "main": "wagtail_multiple_chooser_panel/static_src/main.js",
   "scripts": {
     "start": "webpack --config ./webpack.config.js --mode development --progress --watch",
     "build": "webpack --config ./webpack.config.js --mode production",

@@ -9,7 +9,6 @@
     "esModuleInterop": true
   },
   "files": [
-    "wagtail_multiple_chooser_panel/static_src/main.tsx",
-    "wagtail_multiple_chooser_panel/static_src/custom.d.ts"
+    "wagtail_multiple_chooser_panel/static_src/main.js"
   ]
 }

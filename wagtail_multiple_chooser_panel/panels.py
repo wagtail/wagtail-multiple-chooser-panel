@@ -1,4 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
+from django.forms import Media
 from wagtail.admin.panels import InlinePanel
 from wagtail.telepath import JSContext
 
@@ -32,4 +33,6 @@ class MultipleChooserPanel(InlinePanel):
 
         @property
         def media(self):
-            return super().media + self.js_context.media
+            return super().media + self.js_context.media + Media(js=[
+                'wagtail_multiple_chooser_panel/js/wagtail-multiple-chooser-panel.js',
+            ])

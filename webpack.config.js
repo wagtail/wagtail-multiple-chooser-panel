@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './wagtail_multiple_chooser_panel/static_src/main.tsx',
+  entry: './wagtail_multiple_chooser_panel/static_src/main.js',
   module: {
     rules: [
       {
@@ -35,6 +35,7 @@ module.exports = {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'gettext': 'gettext',
+    'jquery': 'jQuery',
   },
   output: {
     path: path.resolve(
