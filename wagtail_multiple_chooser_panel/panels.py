@@ -1,8 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
-from django.forms import Media
-from django.utils.functional import cached_property
 from wagtail.admin.panels import InlinePanel
-from wagtail.admin.staticfiles import versioned_static
 from wagtail.telepath import JSContext
 
 
@@ -22,23 +19,17 @@ class MultipleChooserPanel(InlinePanel):
     class BoundPanel(InlinePanel.BoundPanel):
         template_name = "wagtail_multiple_chooser_panel/multiple_chooser_panel.html"
 
-        @cached_property
-        def chooser_widget(self):
-            return self.formset.empty_form.fields[self.panel.chooser_field_name].widget
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.chooser_widget = self.formset.empty_form.fields[self.panel.chooser_field_name].widget
+            self.js_context = JSContext()
+            self.chooser_widget_telepath_definition = self.js_context.pack(self.chooser_widget)
 
         def get_context_data(self, parent_context=None):
             context = super().get_context_data(parent_context)
-
-            js_context = JSContext()
-            chooser_widget_definition = js_context.pack(self.chooser_widget)
-
-            context["chooser_widget_definition"] = chooser_widget_definition
+            context["chooser_widget_definition"] = self.chooser_widget_telepath_definition
             return context
 
         @property
         def media(self):
-            return super().media + Media(
-                js=[
-                    versioned_static("wagtailadmin/js/telepath/telepath.js"),
-                ],
-            )
+            return super().media + self.js_context.media
