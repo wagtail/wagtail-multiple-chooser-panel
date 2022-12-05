@@ -52,17 +52,5 @@
             canOrder: {% if can_order %}true{% else %}false{% endif %},
             maxForms: {{ self.formset.max_num|unlocalize }}
         });
-
-        var chooserWidgetFactory = window.telepath.unpack(
-            JSON.parse(document.getElementById("id_{{ self.formset.prefix }}-CHOOSER_WIDGET").textContent)
-        );
-        $("#id_{{ self.formset.prefix }}-OPEN_MODAL").click(function() {
-            chooserWidgetFactory.openModal(
-                function(result) {
-                    console.log(result);
-                },
-                {multiple: true}
-            );
-        });
     })();
 </script>
