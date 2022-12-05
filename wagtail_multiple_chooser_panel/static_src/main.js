@@ -1,3 +1,6 @@
-import { inlinePanel } from './inlinePanel';
+import { InlinePanel } from './InlinePanel';
 
-window.MyInlinePanel = inlinePanel;
+class MultipleChooserPanel extends InlinePanel {
+}
+
+window.MultipleChooserPanel = MultipleChooserPanel;

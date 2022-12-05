@@ -28,16 +28,24 @@ export class ExpandingFormset {
     });
   }
 
-  addForm() {
+  addForm(opts = {}) {
+    /*
+    Supported opts:
+    runCallbacks (default: true) - if false, the onAdd and onInit callbacks will not be run
+    */
+    const formIndex = this.formCount;
     const newFormHtml = this.emptyFormTemplate
-      .replace(/__prefix__(.*?['"])/g, this.formCount + '$1')
+      .replace(/__prefix__(.*?['"])/g, formIndex + '$1')
       .replace(/<-(-*)\/script>/g, '<$1/script>');
 
     this.formContainer.append(newFormHtml);
-    if (this.opts.onAdd) this.opts.onAdd(this.formCount);
-    if (this.opts.onInit) this.opts.onInit(this.formCount);
 
     this.formCount += 1;
     this.totalFormsInput.val(this.formCount);
+
+    if (!('runCallbacks' in opts) || opts.runCallbacks) {
+      if (this.opts.onAdd) this.opts.onAdd(formIndex);
+      if (this.opts.onInit) this.opts.onInit(formIndex);
+    }
   }
 }

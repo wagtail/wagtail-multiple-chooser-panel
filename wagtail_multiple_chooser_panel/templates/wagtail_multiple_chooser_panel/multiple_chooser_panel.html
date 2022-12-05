@@ -46,19 +46,12 @@
 
 <script>
     (function() {
-        var panel = MyInlinePanel({
+        var panel = new MultipleChooserPanel({
             formsetPrefix: "id_{{ self.formset.prefix }}",
             emptyChildFormPrefix: "{{ self.empty_child.form.prefix }}",
             canOrder: {% if can_order %}true{% else %}false{% endif %},
             maxForms: {{ self.formset.max_num|unlocalize }}
         });
-
-        {% for child in self.children %}
-            panel.initChildControls("{{ child.form.prefix }}");
-        {% endfor %}
-        panel.updateChildCount();
-        panel.updateMoveButtonDisabledStates();
-        panel.updateAddButtonState();
 
         var chooserWidgetFactory = window.telepath.unpack(
             JSON.parse(document.getElementById("id_{{ self.formset.prefix }}-CHOOSER_WIDGET").textContent)
